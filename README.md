@@ -119,15 +119,20 @@ Thread num  : 4
 
 ```
 ## Запуск приложения YOLOv5 на Khadas
-1. Устанавливаем OpenCV
+1. Клонируем репозиторий с приложением
+```
+git clone https://github.com/SashaAlderson/khadas_yolov5
+cd khadas_yolov5
+```
+2. Устанавливаем OpenCV
 ```
 sudo apt install libopencv-dev
 ```
-2. Собираем приложение
+3. Собираем приложение
 ```
 ./build-cv4.sh
 ```
-3. Запускаем инференс [модели](https://drive.google.com/drive/folders/1wlErIkcGLRwXylHBNNuMXS2gnXjkixCY?usp=sharing) на нашем изображении
+4. Запускаем инференс [модели](https://drive.google.com/drive/folders/1wlErIkcGLRwXylHBNNuMXS2gnXjkixCY?usp=sharing) на нашем изображении
 ```
 $ cd cv4_output
 $ ./yolov5 -m yolov5m_leaky_352_uint8.tmfile -i dog.jpg -r 10 -t 4 -s 352
