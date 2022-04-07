@@ -86,7 +86,7 @@ Version     : v1.2, 15:15:47 Jun 22 2021
 Status      : uint8, per-layer, asymmetric
 Input model : models/yolov5m_leaky_352.tmfile
 Output model: models/yolov5m_leaky_352_uint8.tmfile
-Calib images: calibration/
+Calib images: calibration
 Scale file  : NULL
 Algorithm   : MIN MAX
 Dims        : 3 352 352
