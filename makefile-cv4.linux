@@ -1,0 +1,58 @@
+TARGET_NAME = yolov5
+OBJ_DIR = cv4_output
+#INSTALL_DIR :=
+
+
+#LIBS += -L$(NNSDK_DIR)/lib/lib64 -lnnsdk
+LIBS += -L$(OPENCV_ROOT)/lib -lopencv_core -lopencv_dnn -lopencv_imgproc -lopencv_core -lopencv_videoio -lopencv_imgcodecs -lopencv_highgui -lopencv_video
+LIBS += -L$(OPENCV_ROOT)/lib -lz -lm
+LIBS += -L$(TENGINE_DIR)/lib -ltengine-lite
+LIBS += -L$(DDK_DIR)/drivers -lOpenVX -lOpenVXU -lCLC -lVSC -lGAL -lovxlib -lArchModelSw -lNNArchPerf
+
+INCLUDE += -I./include
+INCLUDE += -I$(TENGINE_DIR)/include
+INCLUDE += -I$(DDK_DIR)/include
+INCLUDE += -I$(OPENCV_ROOT)/modules/objdetect/include
+INCLUDE += -I$(OPENCV_ROOT)/modules/core/include
+INCLUDE += -I$(OPENCV_ROOT)/
+INCLUDE += -I$(OPENCV_ROOT)/modules/highgui/include
+INCLUDE += -I$(OPENCV_ROOT)/modules/imgcodecs/include
+INCLUDE += -I$(OPENCV_ROOT)/modules/videoio/include
+INCLUDE += -I$(OPENCV_ROOT)/modules/imgproc/include
+CXXFLAGS += -std=c++11 -std=gnu++11 -Wall -std=c++11 $(INCLUDE)
+
+CXX = $(TOOLCHAIN)$(CROSS_COMPILE)g++
+CC = $(TOOLCHAIN)$(CROSS_COMPILE)gcc
+
+TARGET_OUTPUT = $(OBJ_DIR)/$(TARGET_NAME) 
+
+#OBJECTS += $(OBJ_DIR)/tengine_operations.o
+OBJECTS += $(OBJ_DIR)/yolov5.o
+
+#############################################################################################################
+
+LDFLAGS += -Wall -shared -Wl,-soname,$(TARGET_NAME) -Wl,-z,defs
+
+all: $(TARGET_OUTPUT)
+
+clean:
+	@rm -rf $(OBJ_DIR)/* $(OBJ_DIR)
+
+install: $(TARGET_OUTPUT)
+	@mkdir -p $(INSTALL_DIR)
+	@-cp $(TARGET_OUTPUT) $(INSTALL_DIR)
+
+$(TARGET_OUTPUT): $(OBJECTS)
+	@$(CXX) $(OBJECTS) -o $(TARGET_OUTPUT) $(LIBS)
+
+$(OBJ_DIR)/%.o: %.cpp
+	@echo "  COMPILE $(abspath $<)"
+	@mkdir -p $(OBJ_DIR)
+	@$(CXX) -c $(CXXFLAGS) -o $@ $<
+
+$(OBJ_DIR)/%.o: %.c
+	@echo "  COMPILE $(abspath $<)"
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(LDFLAGS) -c $(CFLAGS) -o $@ $<
+
+
