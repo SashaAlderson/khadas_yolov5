@@ -737,7 +737,7 @@ int main(int argc, char* argv[])
     }
 
     /* prepare process input data, set the data mem to input tensor */
-    float input_scale = 0.f;
+    float input_scale = 0.f; 
     int input_zero_point = 0;
 	cv::Mat frame = cv::imread(image_file,cv::IMREAD_COLOR);
 	if (frame.empty())
