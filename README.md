@@ -130,6 +130,7 @@ sudo apt install libopencv-dev
 ```
 3. Собираем приложение
 ```
+chmod u+x build-cv4.sh 
 ./build-cv4.sh
 ```
 4. Запускаем инференс [модели](https://drive.google.com/drive/folders/1wlErIkcGLRwXylHBNNuMXS2gnXjkixCY?usp=sharing) на нашем изображении
