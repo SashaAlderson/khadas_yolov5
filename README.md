@@ -136,7 +136,7 @@ chmod u+x build-cv4.sh
 4. Запускаем инференс [модели](https://drive.google.com/drive/folders/1wlErIkcGLRwXylHBNNuMXS2gnXjkixCY?usp=sharing) на нашем изображении
 ```
 $ cd cv4_output
-$ ./yolov5 -m yolov5m_leaky_352_uint8.tmfile -i dog.jpg -r 10 -t 4 -s 352
+$ ./yolov5 -m yolov5m_leaky_352_uint8.tmfile -i ../dog.jpg -r 10 -t 4 -s 352
 
 tengine-lite library version: 1.4-dev
 authorise ok
